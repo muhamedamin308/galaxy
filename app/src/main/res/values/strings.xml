@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Solar System</string>
+    <string-array name="planet_type">
+        <item>Terrestrial</item>
+        <item>Gas Giant</item>
+        <item>Ice Giant</item>
+    </string-array>
+</resources>
