@@ -11,22 +11,9 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.example.recycleview.R;
 
-@Database(entities = Planet.class , version = 1)
+@Database(entities = Planet.class, version = 1)
 public abstract class GalaxyRoomDB extends RoomDatabase {
     private static GalaxyRoomDB instance;
-    public abstract GalaxyDao galaxyDao();
-
-    //Singleton
-    public static synchronized GalaxyRoomDB getInstance(Context context){
-        if (instance == null){
-            instance = Room.databaseBuilder(context.getApplicationContext(), GalaxyRoomDB.class ,
-                    "planet-data")
-                    .fallbackToDestructiveMigration()
-                    .addCallback(roomCallBack)
-                    .build();
-        }
-        return instance;
-    }
     private static final RoomDatabase.Callback roomCallBack = new RoomDatabase.Callback() {
         @Override
         public void onCreate(@NonNull SupportSQLiteDatabase db) {
@@ -35,17 +22,32 @@ public abstract class GalaxyRoomDB extends RoomDatabase {
         }
     };
 
-    private static class GalaxySpaceAsyncTask extends AsyncTask<Void , Void , Void>{
+    //Singleton
+    public static synchronized GalaxyRoomDB getInstance(Context context) {
+        if (instance == null) {
+            instance = Room.databaseBuilder(context.getApplicationContext(), GalaxyRoomDB.class,
+                            "planet-data")
+                    .fallbackToDestructiveMigration()
+                    .addCallback(roomCallBack)
+                    .build();
+        }
+        return instance;
+    }
+
+    public abstract GalaxyDao galaxyDao();
+
+    private static class GalaxySpaceAsyncTask extends AsyncTask<Void, Void, Void> {
         private final GalaxyDao mgalaxyDao;
 
-        GalaxySpaceAsyncTask (GalaxyRoomDB galaxyRoomdb){
+        GalaxySpaceAsyncTask(GalaxyRoomDB galaxyRoomdb) {
             mgalaxyDao = galaxyRoomdb.galaxyDao();
         }
+
         @Override
         protected Void doInBackground(Void... voids) {
             mgalaxyDao.insert(new Planet(
                     R.drawable.mercury2,
-                    "Mercury" ,
+                    "Mercury",
                     "The smallest planet in our solar system and nearest to the Sun",
                     "Mercury is only slightly larger than Earth's Moon. \n" +
                             "From the surface of Mercury, the Sun would appear more than three times as large as it does when viewed from Earth," +

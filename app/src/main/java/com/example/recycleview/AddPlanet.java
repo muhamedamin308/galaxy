@@ -1,15 +1,19 @@
 package com.example.recycleview;
 
-import static com.example.recycleview.database.Constants.*;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.res.ResourcesCompat;
-import androidx.lifecycle.ViewModelProviders;
+import static com.example.recycleview.database.Constants.DESC1_IN_RECORD;
+import static com.example.recycleview.database.Constants.DESC2_IN_RECORD;
+import static com.example.recycleview.database.Constants.EXTRA_DESC_1;
+import static com.example.recycleview.database.Constants.EXTRA_DESC_2;
+import static com.example.recycleview.database.Constants.EXTRA_ID;
+import static com.example.recycleview.database.Constants.EXTRA_PLANET_IMAGE;
+import static com.example.recycleview.database.Constants.EXTRA_PLANET_LENGTH;
+import static com.example.recycleview.database.Constants.EXTRA_PLANET_NAME;
+import static com.example.recycleview.database.Constants.EXTRA_PLANET_RADIUS;
+import static com.example.recycleview.database.Constants.EXTRA_PLANET_TYPE;
+import static com.example.recycleview.database.Constants.TITLE_IN_RECORD;
 
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.speech.RecognizerIntent;
@@ -25,25 +29,25 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProviders;
+
 import com.example.recycleview.database.AddPlanetViewModel;
 import com.example.recycleview.database.Planet;
 
-import org.w3c.dom.Text;
-
-import java.io.FileNotFoundException;
-import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
-public class AddPlanet extends AppCompatActivity  implements AdapterView.OnItemSelectedListener {
+public class AddPlanet extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+    private final int selectPhoto = 4;
     private EditText planetName, planetDesc1, planetDesc2, planetRadius, planetLengthYear;
     private ImageView imageView;
     private AddPlanetViewModel mViewModel;
     private Drawable drawable;
     private int mID;
     private String planetTypeSelected;
-    private final int selectPhoto = 4;
     private boolean editMode;
 
 
@@ -79,8 +83,8 @@ public class AddPlanet extends AppCompatActivity  implements AdapterView.OnItemS
             planetDesc1.setText(i.getStringExtra(EXTRA_DESC_1));
             planetDesc2.setText(i.getStringExtra(EXTRA_DESC_2));
             int image = Objects.requireNonNull(i.getExtras()).getInt(EXTRA_PLANET_IMAGE);
-            planetRadius.setText(""+i.getIntExtra(EXTRA_PLANET_RADIUS, -1));
-            planetLengthYear.setText(""+i.getIntExtra(EXTRA_PLANET_LENGTH, -1));
+            planetRadius.setText("" + i.getIntExtra(EXTRA_PLANET_RADIUS, -1));
+            planetLengthYear.setText("" + i.getIntExtra(EXTRA_PLANET_LENGTH, -1));
             planetTypeSelected = i.getStringExtra(EXTRA_PLANET_TYPE);
             fixedType.setText(planetTypeSelected);
             imageView.setImageResource(image);
