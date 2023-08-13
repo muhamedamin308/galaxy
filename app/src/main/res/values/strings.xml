@@ -1,8 +1,24 @@
 <resources>
     <string name="app_name">Solar System</string>
+    <string name="add_planet">Add New Planet</string>
+    <string name="update_planet">Update The Planet</string>
+    <string name="planet">Planet</string>
+    <string name="planet_details">Planet details</string>
+    <string name="textview">TextView</string>
+    <string name="back">Back</string>
+    <string name="planet_image">planetImage</string>
+    <string name="s_p_a_c_e">S P A C E</string>
+    <string name="new_image">new_image</string>
+    <string name="planet_name">Planet Name</string>
+    <string name="mic">mic</string>
+    <string name="planet_description">Planet Description</string>
+    <string name="planet_more_description">Planet More Description</string>
+    <string name="radius">Radius</string>
+    <string name="length_of_year">Length Of Year</string>
     <string-array name="planet_type">
         <item>Terrestrial</item>
         <item>Gas Giant</item>
         <item>Ice Giant</item>
+        <item>Unknown</item>
     </string-array>
 </resources>

@@ -11,25 +11,30 @@ import java.util.List;
 public class GalaxyViewModel extends AndroidViewModel {
     private final PlanetRepository mPlanetRepository;
     private final LiveData<List<Planet>> mAllData;
+
     public GalaxyViewModel(@NonNull Application application) {
         super(application);
         mPlanetRepository = new PlanetRepository(application);
         mAllData = mPlanetRepository.getAllData();
     }
 
-    public void insertV (Planet planet){
+    public void insertV(Planet planet) {
         mPlanetRepository.insertR(planet);
     }
-    public void updateV (Planet planet){
+
+    public void updateV(Planet planet) {
         mPlanetRepository.updateR(planet);
     }
-    public void deleteV (Planet planet){
+
+    public void deleteV(Planet planet) {
         mPlanetRepository.deleteR(planet);
     }
-    public void deleteAllPlanets (){
+
+    public void deleteAllPlanets() {
         mPlanetRepository.deleteAllPlanets();
     }
-    public LiveData<List<Planet>> getmAllData(){
+
+    public LiveData<List<Planet>> getmAllData() {
         return mAllData;
     }
 }

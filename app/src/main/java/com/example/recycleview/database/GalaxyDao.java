@@ -21,7 +21,7 @@ public interface GalaxyDao {
     void delete(Planet planet);
 
     @Query("DELETE FROM Planet")
-    void deleteAll ();
+    void deleteAll();
 
     @Query("SELECT * FROM Planet")
     LiveData<List<Planet>> getAllPlanets();

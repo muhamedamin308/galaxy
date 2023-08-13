@@ -12,4 +12,20 @@ public class Constants {
     public static final String EXTRA_PLANET_RADIUS = "PLANET RADIUS";
     public static final String EXTRA_PLANET_LENGTH = "PLANET LENGTH";
     public static final String EXTRA_PLANET_TYPE = "PLANET TYPE";
+    public static final String DETAILS_ID = "ID";
+    public static final String DETAILS_PLANET_NAME = "NAME";
+    public static final String DETAILS_DESC_1 = "DESC 1";
+    public static final String DETAILS_DESC_2 = "DESC 2";
+    public static final String DETAILS_PLANET_IMAGE = "IMAGE";
+    public static final String DETAILS_PLANET_RADIUS = "RADIUS";
+    public static final String DETAILS_PLANET_LENGTH = "LENGTH";
+    public static final String DETAILS_PLANET_TYPE = "TYPE";
+
+    public static String RADIUS(int radius) {
+        return ("" + radius + " in KM");
+    }
+
+    public static String LENGTH(int length) {
+        return ("" + length + " Earth days");
+    }
 }

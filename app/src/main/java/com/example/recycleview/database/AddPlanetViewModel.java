@@ -14,10 +14,11 @@ public class AddPlanetViewModel extends AndroidViewModel {
 
     }
 
-    public void insertAV (Planet planet){
+    public void insertAV(Planet planet) {
         mPlanetRepository.insertR(planet);
     }
-    public void updateAV (Planet planet){
+
+    public void updateAV(Planet planet) {
         mPlanetRepository.updateR(planet);
     }
 

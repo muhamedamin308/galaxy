@@ -1,11 +1,5 @@
 package com.example.recycleview;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProviders;
-import androidx.recyclerview.widget.ItemTouchHelper;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -13,7 +7,15 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.recycleview.database.GalaxyViewModel;
+import com.example.recycleview.databinding.ActivityMainBinding;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -23,25 +25,20 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        setTitle("Solar System");
-        Toast.makeText(MainActivity.this,
-                "Click on any item to more details.",
-                Toast.LENGTH_SHORT).show();
-        RecyclerView recyclerView = findViewById(R.id.recyclerview);
-        recyclerView.setHasFixedSize(false);
+        ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        setTitle(R.string.app_name);
+        Toast.makeText(MainActivity.this, "Click on any item to more details.", Toast.LENGTH_SHORT).show();
+        binding.recyclerview.setHasFixedSize(false);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         adapter = new AdapterManager(MainActivity.this);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(adapter);
+        binding.recyclerview.setLayoutManager(layoutManager);
+        binding.recyclerview.setAdapter(adapter);
 
         mGalaxyViewModel = ViewModelProviders.of(this).get(GalaxyViewModel.class);
-        mGalaxyViewModel.getmAllData().observe(
-                this,
-                galaxyClasses -> adapter.setGalaxyList(galaxyClasses));
+        mGalaxyViewModel.getmAllData().observe(this, galaxyClasses -> adapter.setGalaxyList(galaxyClasses));
 
-        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0 ,
-                ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
             @Override
             public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
                 return false;
@@ -52,14 +49,13 @@ public class MainActivity extends AppCompatActivity {
                 int pos = viewHolder.getAdapterPosition();
                 mGalaxyViewModel.deleteV(adapter.getPlanetAt(pos));
             }
-        }).attachToRecyclerView(recyclerView);
+        }).attachToRecyclerView(binding.recyclerview);
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu)
-    {
+    public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater m = getMenuInflater();
-        m.inflate(R.menu.menu2 , menu);
+        m.inflate(R.menu.menu2, menu);
         return super.onCreateOptionsMenu(menu);
     }
 

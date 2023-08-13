@@ -15,20 +15,17 @@ public class Planet {
     @PrimaryKey(autoGenerate = true)
     int number;
 
-    public Planet(int imageResource,
-                  String text1,
-                  String text2,
-                  String description,
-                  int radius,
-                  String distanceFromSun,
-                  int yearLength){
+    public Planet(int imageResource, String text1, String text2, String description, int radius, String distanceFromSun, int yearLength) {
         this.imageResource = imageResource;
         this.text1 = text1;
         this.text2 = text2;
-        this.description= description;
+        this.description = description;
         this.radius = radius;
         this.type = distanceFromSun;
         this.yearLength = yearLength;
+    }
+
+    public Planet() {
     }
 
     public String getDescription() {
@@ -38,23 +35,25 @@ public class Planet {
     public int getImageResource() {
         return imageResource;
     }
-    public String getText1 (){
+
+    public void setImageResource(int imageResource) {
+        this.imageResource = imageResource;
+    }
+
+    public String getText1() {
         return text1;
     }
 
     public String getText2() {
         return text2;
     }
-    public int getNumber(){
+
+    public int getNumber() {
         return number;
     }
 
     public void setNumber(int number) {
         this.number = number;
-    }
-
-    public void setImageResource(int imageResource) {
-        this.imageResource = imageResource;
     }
 
     public int getRadius() {
@@ -68,6 +67,4 @@ public class Planet {
     public int getYearLength() {
         return yearLength;
     }
-
-    public Planet(){}
 }

@@ -1,122 +1,129 @@
 package com.example.recycleview;
 
-import androidx.appcompat.app.AppCompatActivity;
+import static com.example.recycleview.database.Constants.DETAILS_DESC_1;
+import static com.example.recycleview.database.Constants.DETAILS_DESC_2;
+import static com.example.recycleview.database.Constants.DETAILS_ID;
+import static com.example.recycleview.database.Constants.DETAILS_PLANET_IMAGE;
+import static com.example.recycleview.database.Constants.DETAILS_PLANET_LENGTH;
+import static com.example.recycleview.database.Constants.DETAILS_PLANET_NAME;
+import static com.example.recycleview.database.Constants.DETAILS_PLANET_RADIUS;
+import static com.example.recycleview.database.Constants.DETAILS_PLANET_TYPE;
+import static com.example.recycleview.database.Constants.LENGTH;
+import static com.example.recycleview.database.Constants.RADIUS;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.recycleview.databinding.ActivityPlanetDetailsBinding;
+
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class PlanetDetails extends AppCompatActivity {
-    TextView planetName, planetDesc, planetRadius, planetLength, planetType;
-    TextView tvType, tvRadius, tvLength;
-    ImageView planetImage, back;
+    private ActivityPlanetDetailsBinding binding;
 
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_planet_details);
-        planetImage = findViewById(R.id.imageviewid);
-        planetName = findViewById(R.id.planetTitle);
-        planetDesc = findViewById(R.id.planetDetails);
-        back = findViewById(R.id.imageBack);
-        planetType = findViewById(R.id.planetTypeDetails);
-        planetLength = findViewById(R.id.planetLengthDetails);
-        planetRadius = findViewById(R.id.planetRadiusDetails);
-        tvType = findViewById(R.id.tvType);
-        tvRadius = findViewById(R.id.tvRadius);
-        tvLength = findViewById(R.id.tvLength);
+        binding = ActivityPlanetDetailsBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         Intent intent = getIntent();
-        int id = Objects.requireNonNull(intent.getExtras()).getInt("id");
-        String Title = Objects.requireNonNull(intent.getExtras()).getString("title");
+        int id = Objects.requireNonNull(intent.getExtras()).getInt(DETAILS_ID);
+        String Title = Objects.requireNonNull(intent.getExtras()).getString(DETAILS_PLANET_NAME);
         setTitle(Title + " Details");
         colorsSelection(id);
-        String Description = intent.getExtras().getString("Description");
-        String desc2 = intent.getExtras().getString("desc");
-        int Image = intent.getExtras().getInt("image");
-        int radius = intent.getExtras().getInt("radius");
-        int length = intent.getExtras().getInt("length");
-        String type = intent.getExtras().getString("type");
+        String Description = intent.getExtras().getString(DETAILS_DESC_2);
+        String desc2 = intent.getExtras().getString(DETAILS_DESC_1);
+        int Image = intent.getExtras().getInt(DETAILS_PLANET_IMAGE);
+        int radius = intent.getExtras().getInt(DETAILS_PLANET_RADIUS);
+        int length = intent.getExtras().getInt(DETAILS_PLANET_LENGTH);
+        String type = intent.getExtras().getString(DETAILS_PLANET_TYPE);
 
-        planetImage.setImageResource(Image);
-        planetName.setText(Title);
-        planetDesc.setText(Description + desc2);
-        planetType.setText(type);
-        planetRadius.setText("" + radius + " in KM");
-        planetLength.setText("" + length + " Earth days");
+        binding.imageViewId.setImageResource(Image);
+        binding.planetTitle.setText(Title);
+        binding.planetDetails.setText(Description + desc2);
+        binding.planetTypeDetails.setText(type);
+        binding.planetRadiusDetails.setText(RADIUS(radius));
+        binding.planetLengthDetails.setText(LENGTH(length));
 
-        back.setOnClickListener(view -> finish());
+        binding.imageBack.setOnClickListener(view -> finish());
     }
 
-    private void colorsSelection(int id){
+    private void colorsSelection(int id) {
+        ArrayList<TextView> IDs = new ArrayList<>();
+        IDs.add(binding.planetTitle);
+        IDs.add(binding.tvType);
+        IDs.add(binding.tvRadius);
+        IDs.add(binding.tvLength);
+        int i = 0;
         switch (id) {
             case 1: {
-                planetName.setTextColor(getResources().getColor(R.color.mercury));
-                tvType.setTextColor(getResources().getColor(R.color.mercury));
-                tvRadius.setTextColor(getResources().getColor(R.color.mercury));
-                tvLength.setTextColor(getResources().getColor(R.color.mercury));
+                while (i < IDs.size()) {
+                    IDs.get(i).setTextColor(getResources().getColor(R.color.mercury));
+                    i++;
+                }
             }
             break;
             case 2: {
-                planetName.setTextColor(getResources().getColor(R.color.venus));
-                tvType.setTextColor(getResources().getColor(R.color.venus));
-                tvRadius.setTextColor(getResources().getColor(R.color.venus));
-                tvLength.setTextColor(getResources().getColor(R.color.venus));
+                while (i < IDs.size()) {
+                    IDs.get(i).setTextColor(getResources().getColor(R.color.venus));
+                    i++;
+                }
             }
             break;
             case 3: {
-                planetName.setTextColor(getResources().getColor(R.color.earth));
-                tvType.setTextColor(getResources().getColor(R.color.earth));
-                tvRadius.setTextColor(getResources().getColor(R.color.earth));
-                tvLength.setTextColor(getResources().getColor(R.color.earth));
+                while (i < IDs.size()) {
+                    IDs.get(i).setTextColor(getResources().getColor(R.color.earth));
+                    i++;
+                }
             }
             break;
             case 4: {
-                planetName.setTextColor(getResources().getColor(R.color.mars));
-                tvType.setTextColor(getResources().getColor(R.color.mars));
-                tvRadius.setTextColor(getResources().getColor(R.color.mars));
-                tvLength.setTextColor(getResources().getColor(R.color.mars));
+                while (i < IDs.size()) {
+                    IDs.get(i).setTextColor(getResources().getColor(R.color.mars));
+                    i++;
+                }
             }
             break;
             case 5: {
-                planetName.setTextColor(getResources().getColor(R.color.jupiter));
-                tvType.setTextColor(getResources().getColor(R.color.jupiter));
-                tvRadius.setTextColor(getResources().getColor(R.color.jupiter));
-                tvLength.setTextColor(getResources().getColor(R.color.jupiter));
+                while (i < IDs.size()) {
+                    IDs.get(i).setTextColor(getResources().getColor(R.color.jupiter));
+                    i++;
+                }
             }
             break;
             case 6: {
-                planetName.setTextColor(getResources().getColor(R.color.saturn));
-                tvType.setTextColor(getResources().getColor(R.color.saturn));
-                tvRadius.setTextColor(getResources().getColor(R.color.saturn));
-                tvLength.setTextColor(getResources().getColor(R.color.saturn));
+                while (i < IDs.size()) {
+                    IDs.get(i).setTextColor(getResources().getColor(R.color.saturn));
+                    i++;
+                }
             }
             break;
             case 7: {
-                planetName.setTextColor(getResources().getColor(R.color.uranus));
-                tvType.setTextColor(getResources().getColor(R.color.uranus));
-                tvRadius.setTextColor(getResources().getColor(R.color.uranus));
-                tvLength.setTextColor(getResources().getColor(R.color.uranus));
+                while (i < IDs.size()) {
+                    IDs.get(i).setTextColor(getResources().getColor(R.color.uranus));
+                    i++;
+                }
             }
             break;
             case 8: {
-                planetName.setTextColor(getResources().getColor(R.color.neptune));
-                tvType.setTextColor(getResources().getColor(R.color.neptune));
-                tvRadius.setTextColor(getResources().getColor(R.color.neptune));
-                tvLength.setTextColor(getResources().getColor(R.color.neptune));
+                while (i < IDs.size()) {
+                    IDs.get(i).setTextColor(getResources().getColor(R.color.neptune));
+                    i++;
+                }
             }
             break;
             default: {
-                planetName.setTextColor(getResources().getColor(R.color.title_font));
-                tvType.setTextColor(getResources().getColor(R.color.title_font));
-                tvRadius.setTextColor(getResources().getColor(R.color.title_font));
-                tvLength.setTextColor(getResources().getColor(R.color.title_font));
+                while (i < IDs.size()) {
+                    IDs.get(i).setTextColor(getResources().getColor(R.color.title_font));
+                    i++;
+                }
             }
         }
     }

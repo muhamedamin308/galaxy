@@ -18,7 +18,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:background="@color/background_app"
             android:gravity="end"
             android:orientation="vertical"
@@ -29,7 +29,7 @@
                 android:layout_height="match_parent">
 
                 <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/IMAGE"
+                    android:id="@+id/planetImageResource"
                     android:layout_width="150dp"
                     android:layout_height="150dp"
                     android:layout_margin="10dp"
@@ -44,6 +44,7 @@
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_gravity="bottom"
+                    android:contentDescription="@string/new_image"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.956"
@@ -66,9 +67,10 @@
                     android:layout_marginTop="20dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginBottom="10dp"
+                    android:autofillHints="Planet Name"
                     android:backgroundTint="@color/white"
                     android:ems="10"
-                    android:hint="Planet Name"
+                    android:hint="@string/planet_name"
                     android:inputType="textPersonName"
                     android:minHeight="48dp"
                     android:textColor="@color/white"
@@ -80,6 +82,7 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_marginTop="31dp"
+                    android:contentDescription="@string/mic"
                     app:srcCompat="@drawable/microphone" />
             </LinearLayout>
 
@@ -95,9 +98,10 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginBottom="5dp"
+                    android:autofillHints="Planet Description"
                     android:backgroundTint="@color/white"
                     android:ems="10"
-                    android:hint="Planet Description"
+                    android:hint="@string/planet_description"
                     android:inputType="textPersonName"
                     android:minHeight="48dp"
                     android:textColor="@color/white"
@@ -108,6 +112,7 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_marginTop="10dp"
+                    android:contentDescription="@string/mic"
                     app:srcCompat="@drawable/microphone" />
             </LinearLayout>
 
@@ -123,9 +128,10 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginBottom="5dp"
+                    android:autofillHints="Planet More Description"
                     android:backgroundTint="@color/white"
                     android:ems="10"
-                    android:hint="Planet More Description"
+                    android:hint="@string/planet_more_description"
                     android:inputType="textPersonName"
                     android:minHeight="48dp"
                     android:textColor="@color/white"
@@ -136,6 +142,7 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_marginTop="10dp"
+                    android:contentDescription="@string/mic"
                     app:srcCompat="@drawable/microphone" />
 
             </LinearLayout>
@@ -151,7 +158,7 @@
                     android:layout_width="116dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-black"
-                    android:text="TextView"
+                    android:text="@string/textview"
                     android:textColor="@color/fontDesc"
                     android:textSize="17sp"
                     android:textStyle="bold"
@@ -177,8 +184,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
+                    android:autofillHints="Planet Radius"
                     android:ems="5"
-                    android:hint="Radius"
+                    android:hint="@string/radius"
                     android:inputType="number"
                     android:textColor="@color/title_font"
                     android:textColorHint="@color/fontDesc"
@@ -192,7 +200,8 @@
                     android:id="@+id/planetLengthYearAddPlanet"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="Length Of Year"
+                    android:autofillHints="Planet Length of Year in Earth Days"
+                    android:hint="@string/length_of_year"
                     android:inputType="number"
                     android:textColor="@color/title_font"
                     android:textColorHint="@color/fontDesc"

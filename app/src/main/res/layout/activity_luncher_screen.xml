@@ -10,7 +10,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="S P A C E"
+        android:text="@string/s_p_a_c_e"
         android:textColor="@color/desc2_font"
         android:textSize="35sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -22,7 +22,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Solar System"
+        android:text="@string/app_name"
         android:textColor="@color/title_font"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
