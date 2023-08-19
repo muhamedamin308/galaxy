@@ -162,8 +162,7 @@ public class AddPlanet extends AppCompatActivity implements AdapterView.OnItemSe
         } else {
             mViewModel.insertAV(new Planet(SELECTED_IMAGE, planetName, planetDesc1, planetDesc2, radius, planetTypeSelected, length, SELECTED_COLOR));
         }
-        Intent back = new Intent(AddPlanet.this, MainActivity.class);
-        startActivity(back);
+        finish();
     }
 
     private void prepareMic() {
