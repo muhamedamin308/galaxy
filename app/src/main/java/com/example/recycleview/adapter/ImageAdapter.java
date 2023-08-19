@@ -1,6 +1,8 @@
 package com.example.recycleview.adapter;
 
-import static com.example.recycleview.database.classes.Constants.Select.*;
+import static com.example.recycleview.database.classes.Constants.Select.IMAGE_ID;
+import static com.example.recycleview.database.classes.Constants.Select.SELECT_IMAGE_COLOR;
+import static com.example.recycleview.database.classes.Constants.Select.SELECT_IMAGE_ID;
 
 import android.content.Context;
 import android.content.Intent;
