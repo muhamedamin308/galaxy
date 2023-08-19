@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -14,7 +15,8 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.recycleview.database.GalaxyViewModel;
+import com.example.recycleview.adapter.AdapterManager;
+import com.example.recycleview.database.viewmodel.GalaxyViewModel;
 import com.example.recycleview.databinding.ActivityMainBinding;
 
 
@@ -28,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
         ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         setTitle(R.string.app_name);
+
         Toast.makeText(MainActivity.this, "Click on any item to more details.", Toast.LENGTH_SHORT).show();
         binding.recyclerview.setHasFixedSize(false);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);

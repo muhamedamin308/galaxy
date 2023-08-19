@@ -1,10 +1,13 @@
-package com.example.recycleview.database;
+package com.example.recycleview.database.viewmodel;
 
 import android.app.Application;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
+
+import com.example.recycleview.database.classes.Planet;
+import com.example.recycleview.database.db.PlanetRepository;
 
 import java.util.List;
 

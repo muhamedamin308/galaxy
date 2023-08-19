@@ -1,21 +1,28 @@
-package com.example.recycleview.database;
+package com.example.recycleview.database.classes;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity
 public class Planet {
+
+    public int radius;
     public String text1;
     public String text2;
     public String description;
-    public int radius;
     public String type;
     public int yearLength;
     public int imageResource;
+    public int planetColor;
+
+
+    public void setPlanetColor(int planetColor) {
+        this.planetColor = planetColor;
+    }
     @PrimaryKey(autoGenerate = true)
     int number;
 
-    public Planet(int imageResource, String text1, String text2, String description, int radius, String distanceFromSun, int yearLength) {
+    public Planet(int imageResource, String text1, String text2, String description, int radius, String distanceFromSun, int yearLength, int planetColor) {
         this.imageResource = imageResource;
         this.text1 = text1;
         this.text2 = text2;
@@ -23,6 +30,7 @@ public class Planet {
         this.radius = radius;
         this.type = distanceFromSun;
         this.yearLength = yearLength;
+        this.planetColor = planetColor;
     }
 
     public Planet() {
@@ -66,5 +74,9 @@ public class Planet {
 
     public int getYearLength() {
         return yearLength;
+    }
+
+    public int getPlanetColor() {
+        return planetColor;
     }
 }

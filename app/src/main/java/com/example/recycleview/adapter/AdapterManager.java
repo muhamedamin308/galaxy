@@ -1,21 +1,7 @@
-package com.example.recycleview;
+package com.example.recycleview.adapter;
 
-import static com.example.recycleview.database.Constants.DETAILS_DESC_1;
-import static com.example.recycleview.database.Constants.DETAILS_DESC_2;
-import static com.example.recycleview.database.Constants.DETAILS_ID;
-import static com.example.recycleview.database.Constants.DETAILS_PLANET_IMAGE;
-import static com.example.recycleview.database.Constants.DETAILS_PLANET_LENGTH;
-import static com.example.recycleview.database.Constants.DETAILS_PLANET_NAME;
-import static com.example.recycleview.database.Constants.DETAILS_PLANET_RADIUS;
-import static com.example.recycleview.database.Constants.DETAILS_PLANET_TYPE;
-import static com.example.recycleview.database.Constants.EXTRA_DESC_1;
-import static com.example.recycleview.database.Constants.EXTRA_DESC_2;
-import static com.example.recycleview.database.Constants.EXTRA_ID;
-import static com.example.recycleview.database.Constants.EXTRA_PLANET_IMAGE;
-import static com.example.recycleview.database.Constants.EXTRA_PLANET_LENGTH;
-import static com.example.recycleview.database.Constants.EXTRA_PLANET_NAME;
-import static com.example.recycleview.database.Constants.EXTRA_PLANET_RADIUS;
-import static com.example.recycleview.database.Constants.EXTRA_PLANET_TYPE;
+import static com.example.recycleview.database.classes.Constants.Details.*;
+import static com.example.recycleview.database.classes.Constants.Extras.*;
 
 import android.content.Context;
 import android.content.Intent;
@@ -28,7 +14,9 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.recycleview.database.Planet;
+import com.example.recycleview.AddPlanet;
+import com.example.recycleview.PlanetDetails;
+import com.example.recycleview.database.classes.Planet;
 import com.example.recycleview.databinding.ListPlanetBinding;
 
 import java.util.ArrayList;
@@ -45,11 +33,7 @@ public class AdapterManager extends RecyclerView.Adapter<AdapterManager.ItemsHol
     @NonNull
     @Override
     public ItemsHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        ListPlanetBinding binding = ListPlanetBinding.inflate(
-                LayoutInflater.from(parent.getContext()),
-                parent,
-                false
-        );
+        ListPlanetBinding binding = ListPlanetBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
         return new ItemsHolder(binding);
     }
 
@@ -69,6 +53,7 @@ public class AdapterManager extends RecyclerView.Adapter<AdapterManager.ItemsHol
             intent.putExtra(DETAILS_PLANET_RADIUS, planet.getRadius());
             intent.putExtra(DETAILS_PLANET_LENGTH, planet.getYearLength());
             intent.putExtra(DETAILS_PLANET_TYPE, planet.getType());
+            intent.putExtra(DETAILS_PLANET_COLOR, planet.getPlanetColor());
             context.startActivity(intent);
         });
         holder.updateImage.setOnClickListener(view -> {
@@ -81,6 +66,7 @@ public class AdapterManager extends RecyclerView.Adapter<AdapterManager.ItemsHol
             intent.putExtra(EXTRA_PLANET_RADIUS, planet.getRadius());
             intent.putExtra(EXTRA_PLANET_TYPE, planet.getType());
             intent.putExtra(EXTRA_PLANET_LENGTH, planet.getYearLength());
+            intent.putExtra(EXTRA_PLANET_COLOR, planet.getPlanetColor());
             context.startActivity(intent);
         });
     }

@@ -3,15 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#3E3D3D"
     tools:context=".MainActivity">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:background="#000000"
         android:padding="4dp"
         android:scrollbars="vertical"
-        tools:listitem="@layout/list_planet" />
+        tools:listitem="@layout/list_planet"/>
 </LinearLayout>

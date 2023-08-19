@@ -34,10 +34,23 @@
                     android:layout_height="150dp"
                     android:layout_margin="10dp"
                     android:src="@drawable/unknown"
+                    android:tag="newimage"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/planetColor"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:background="@color/unKnown"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/planetImageResource"
+                    app:layout_constraintHorizontal_bias="0.175"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.876" />
 
                 <ImageView
                     android:id="@+id/change"

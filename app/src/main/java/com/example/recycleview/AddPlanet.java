@@ -1,20 +1,11 @@
 package com.example.recycleview;
 
-import static com.example.recycleview.database.Constants.DESC1_IN_RECORD;
-import static com.example.recycleview.database.Constants.DESC2_IN_RECORD;
-import static com.example.recycleview.database.Constants.EXTRA_DESC_1;
-import static com.example.recycleview.database.Constants.EXTRA_DESC_2;
-import static com.example.recycleview.database.Constants.EXTRA_ID;
-import static com.example.recycleview.database.Constants.EXTRA_PLANET_IMAGE;
-import static com.example.recycleview.database.Constants.EXTRA_PLANET_LENGTH;
-import static com.example.recycleview.database.Constants.EXTRA_PLANET_NAME;
-import static com.example.recycleview.database.Constants.EXTRA_PLANET_RADIUS;
-import static com.example.recycleview.database.Constants.EXTRA_PLANET_TYPE;
-import static com.example.recycleview.database.Constants.TITLE_IN_RECORD;
+import static com.example.recycleview.database.classes.Constants.Extras.*;
+import static com.example.recycleview.database.classes.Constants.Record.*;
+import static com.example.recycleview.database.classes.Constants.Select.*;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.speech.RecognizerIntent;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -29,17 +20,16 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
 
-import com.example.recycleview.database.AddPlanetViewModel;
-import com.example.recycleview.database.Planet;
+import com.example.recycleview.database.classes.Planet;
+import com.example.recycleview.database.viewmodel.AddPlanetViewModel;
 import com.example.recycleview.databinding.ActivityAddPlanetBinding;
 
 import java.util.ArrayList;
 import java.util.Objects;
 
 public class AddPlanet extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
-    private final int selectPhoto = 4;
     private AddPlanetViewModel mViewModel;
-    private int mID;
+    private int mID, color;
     private String planetTypeSelected;
     private boolean editMode;
     private ActivityAddPlanetBinding binding;
@@ -49,8 +39,6 @@ public class AddPlanet extends AppCompatActivity implements AdapterView.OnItemSe
         super.onCreate(savedInstanceState);
         binding = ActivityAddPlanetBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
-
         Objects.requireNonNull(getSupportActionBar()).setHomeAsUpIndicator(R.drawable.ic_baseline_arrow_back_24);
         Intent i = getIntent();
 
@@ -70,6 +58,8 @@ public class AddPlanet extends AppCompatActivity implements AdapterView.OnItemSe
             binding.planetLengthYearAddPlanet.setText(String.valueOf(i.getIntExtra(EXTRA_PLANET_LENGTH, -1)));
             planetTypeSelected = i.getStringExtra(EXTRA_PLANET_TYPE);
             binding.fixedType.setText(planetTypeSelected);
+            color = i.getIntExtra(EXTRA_PLANET_COLOR, -1);
+            binding.planetColor.setBackgroundColor(getResources().getColor(color));
 
             int image = Objects.requireNonNull(i.getExtras()).getInt(EXTRA_PLANET_IMAGE);
             binding.planetImageResource.setImageResource(image);
@@ -79,10 +69,21 @@ public class AddPlanet extends AppCompatActivity implements AdapterView.OnItemSe
             editMode = false;
             prepareMic();
             binding.change.setOnClickListener(view -> {
-                Intent intent = new Intent(Intent.ACTION_PICK);
-                intent.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(intent, selectPhoto);
+                Intent intent = new Intent(AddPlanet.this, SelectImageActivity.class);
+                startActivity(intent);
             });
+            Intent intent = getIntent();
+            if (intent.hasExtra(IMAGE_ID)) {
+                SELECTED_COLOR = intent.getIntExtra(SELECT_IMAGE_COLOR, -1);
+                SELECTED_IMAGE = intent.getIntExtra(SELECT_IMAGE_ID, -1);
+                binding.planetImageResource.setImageResource(SELECTED_IMAGE);
+                binding.planetColor.setBackgroundColor(getResources().getColor(SELECTED_COLOR));
+            } else {
+                int oldImage = R.drawable.unknown;
+                binding.planetImageResource.setImageResource(oldImage);
+                int oldColor = R.color.unKnown;
+                binding.planetColor.setBackgroundColor(getResources().getColor(oldColor));
+            }
             ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.planet_type, R.layout.spinner_item);
             adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
             binding.planetType.setAdapter(adapter);
@@ -135,8 +136,6 @@ public class AddPlanet extends AppCompatActivity implements AdapterView.OnItemSe
             ArrayList<String> matches = intent.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
             assert matches != null;
             binding.planetDesc2.setText(matches.get(0));
-        } else if (requestCode == selectPhoto && resultCode == RESULT_OK && intent != null && intent.getData() != null) {
-            binding.planetImageResource.setImageURI(intent.getData());
         }
         super.onActivityResult(requestCode, resultCode, intent);
     }
@@ -157,13 +156,14 @@ public class AddPlanet extends AppCompatActivity implements AdapterView.OnItemSe
             Intent intent = getIntent();
             int Image = Objects.requireNonNull(intent.getExtras()).getInt(EXTRA_PLANET_IMAGE);
             binding.planetImageResource.setImageResource(Image);
-            Planet planet = new Planet(Image, planetName, planetDesc1, planetDesc2, radius, planetTypeSelected, length);
+            Planet planet = new Planet(Image, planetName, planetDesc1, planetDesc2, radius, planetTypeSelected, length, color);
             planet.setNumber(mID);
             mViewModel.updateAV(planet);
         } else {
-            mViewModel.insertAV(new Planet(R.drawable.unknown, planetName, planetDesc1, planetDesc2, radius, planetTypeSelected, length));
+            mViewModel.insertAV(new Planet(SELECTED_IMAGE, planetName, planetDesc1, planetDesc2, radius, planetTypeSelected, length, SELECTED_COLOR));
         }
-        finish();
+        Intent back = new Intent(AddPlanet.this, MainActivity.class);
+        startActivity(back);
     }
 
     private void prepareMic() {

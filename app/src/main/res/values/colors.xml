@@ -13,12 +13,23 @@
     <color name="desc2_font">#FFF6E0</color>
     <color name="fontDesc">#aeb6b7</color>
 
-    <color name="earth">#557A46</color>
-    <color name="mercury">#65451F</color>
-    <color name="venus">#EAC696</color>
-    <color name="mars">#C51605</color>
-    <color name="jupiter">#BA704F</color>
-    <color name="saturn">#FFE5AD</color>
-    <color name="uranus">#94ADD7</color>
-    <color name="neptune">#0D1282</color>
+    <color name="earth">#8EED60</color>
+    <color name="mercury">#D1A388</color>
+    <color name="venus">#936951</color>
+    <color name="mars">#F03F00</color>
+    <color name="jupiter">#976343</color>
+    <color name="saturn">#B9AA79</color>
+    <color name="uranus">#0092BC</color>
+    <color name="neptune">#1A0086</color>
+
+    <color name="asteroid">#EACDA0</color>
+    <color name="fullMoon">#66728B</color>
+    <color name="moon">#E7E7E7</color>
+    <color name="planet">#85C7FF</color>
+    <color name="planet2">#9A80EF</color>
+    <color name="planet3">#F9005C</color>
+    <color name="redPlanet">#FFAEA3</color>
+    <color name="unKnown">#00964E</color>
+
+
 </resources>
